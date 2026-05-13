@@ -14,8 +14,8 @@ Frame names are CamelCase, max 64 characters, no spaces.
 
 ## Signal (SG_) name conventions
 
-- **CamelCase** (no underscores within words except where idiomatic)
-- **Max 32 characters** to fit canmatrix DBC limits comfortably
+- **CamelCase** (no underscores within words except where idiomatic; `_` is reserved as a section separator, e.g. `EngineCoolantTemp_C`)
+- **Max 64 characters.** Auto-generated placeholder signals on VDMA frames (`<FrameName>_RawPayload`) can approach this limit; hand-curated signals should be much shorter.
 - **Suffix with units only when ambiguous**, e.g. `BoostPressure_kPa` if multiple pressure signals coexist in the same frame
 - **Boolean / discrete signals end with state suffix:**
   - `_State` for current state (e.g., `KeySwitchState`)
