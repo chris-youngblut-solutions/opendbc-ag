@@ -4,9 +4,28 @@ All notable changes to opendbc-ag are documented here. Format follows [Keep a Ch
 
 ## [Unreleased]
 
-### Added (Phase 6 — README finalization)
-- Expanded README with live coverage table (frames/signals/source per DBC)
-- Cross-link to auto-regenerated `docs/coverage.md`
+(no unreleased changes — next development happens after the v0.1.0-private review)
+
+## [v0.1.0-private] — 2026-05-13
+
+### Added
+- **Phase 6** — README finalization with live coverage table + cross-link to `docs/coverage.md`.
+- **Phase 7** — Community workflow scaffolding: `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`, three `ISSUE_TEMPLATE/*.yml` forms (bug, feature, new-pgn), `docs/signal-naming-guide.md`, `docs/code-of-conduct.md` (adopts Contributor Covenant 2.1 by link + project-specific addendum: scope, reporting contact, conflict-of-interest, appeals, AI-content disclosure, safety-signal disclosure, legal-scope clarification).
+- **Phase 8** — `docs/cabana-for-ag-setup.md`: generic tooling, dongles, ISOBUS pinout (public sources), capture workflow, signal-discovery method, DBC export flow, fleet-specific pinouts flagged `<TODO>`.
+- **Phase 9** — `opendbc_ag/tools/dbc_inferrer.py` (heuristic signal inference), `opendbc_ag/tools/anonymize.py` (log scrubber), deterministic synthetic fixture (`opendbc_ag/tests/fixtures/`), 17 new tests across `test_dbc_inferrer.py`, `test_coverage_report.py`, `test_anonymize.py`.
+- **Phase 10** — `opendbc_ag/tests/test_signal_naming.py` (6 tests: DBC-identifier syntax, length limits, prefix conventions). Naming guide signal-length cap lifted 32 → 64 chars.
+- **Phase 11** — `docs/legal-context.md` (FTC v Deere, FARM Act, Iowa HF 2763, §1201 / repair exemption, Tractor Hacking), `docs/faq.md`, `docs/architecture.md`. README documentation-link section added.
+- **Phase 12** — `RALPH_REPORT.md` (autonomous-build summary + user-TODO punch list); `v0.1.0-private` tag + GitHub pre-release.
+
+### Acceptance criteria (PRD)
+- Repo visibility = PRIVATE — ✅
+- `pytest opendbc_ag/tests/` passes — ✅ (29/29)
+- `canmatrix --check opendbc_ag/dbc/*.dbc` returns 0 errors — ✅
+- Corpus ≥ 80 PGNs — ✅ (2,955 unique PGNs / 3,045 signals)
+- CI workflows green on `main` — ✅
+- `RALPH_REPORT.md` enumerates user TODOs — ✅
+- No PGN in proprietary range — ✅ (CI-enforced)
+- `docs/cabana-for-ag-setup.md` `<TODO>` placeholders tagged — ✅ (7 user TODOs flagged)
 
 ## [v0.0.1] — 2026-05-13
 
