@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package + dev deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Validate all DBC files parse
+        run: |
+          python -c "
+          from pathlib import Path
+          from canmatrix import formats
+          errors = []
+          for dbc in Path('opendbc_ag/dbc').glob('*.dbc'):
+              try:
+                  m = formats.loadp(str(dbc))
+                  mat = list(m.values())[0]
+                  print(f'OK {dbc.name}: {len(mat.frames)} frames, {sum(len(f.signals) for f in mat.frames)} signals')
+              except Exception as e:
+                  errors.append(f'{dbc.name}: {e}')
+                  print(f'FAIL {dbc.name}: {e}')
+          if errors:
+              raise SystemExit(1)
+          "
+
+      - name: Run pytest
+        run: pytest -v

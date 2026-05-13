@@ -1,0 +1,44 @@
+name: Coverage matrix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "opendbc_ag/dbc/**"
+      - "opendbc_ag/tools/coverage_report.py"
+  workflow_dispatch:
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Regenerate docs/coverage.md
+        run: python -m opendbc_ag.tools.coverage_report
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain docs/coverage.md)" ]; then
+            git add docs/coverage.md
+            git commit -m "docs(coverage): auto-regenerate coverage matrix"
+            git push
+          else
+            echo "No coverage changes."
+          fi
