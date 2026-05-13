@@ -1,0 +1,985 @@
+{
+  "source": "Open-Agriculture/AgIsoStack-plus-plus",
+  "source_license": "MIT",
+  "extraction_date": "2026-05-13",
+  "pgn_count_total": 47,
+  "pgn_count_rejected_proprietary": 1,
+  "pgn_count_valid": 46,
+  "pgn_count_enriched_with_signals": 9,
+  "pgns": [
+    {
+      "name": "AgriculturalGuidanceMachineInfo",
+      "pgn": 44032,
+      "pgn_hex": "0xAC00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 19,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:19",
+      "signals": [
+        {
+          "name": "EstimatedCurvature",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.25,
+          "offset": -8032,
+          "unit": "1/km",
+          "comment": "Source: isobus_guidance_interface.hpp GuidanceMachineInfo",
+          "value_table": {}
+        },
+        {
+          "name": "MechanicalSystemLockoutState",
+          "start_bit": 16,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "NotActive",
+            "1": "Active",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MachineSteeringSystemReadinessState",
+          "start_bit": 18,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "NotReady",
+            "1": "Ready",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MachineSteeringSystemCommandExitReasonCode",
+          "start_bit": 20,
+          "length": 6,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "Per ISO 11783-7 exit reason codes",
+          "value_table": {}
+        },
+        {
+          "name": "GuidanceLimitStatus",
+          "start_bit": 29,
+          "length": 3,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "NotLimited",
+            "1": "OperatorLimited",
+            "2": "LimitedHigh",
+            "3": "LimitedLow"
+          }
+        },
+        {
+          "name": "GuidanceRequestStatus",
+          "start_bit": 32,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "RequiredNoSteer",
+            "1": "Required",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AgriculturalGuidanceSystemCommand",
+      "pgn": 44288,
+      "pgn_hex": "0xAD00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 20,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:20",
+      "signals": [
+        {
+          "name": "CurvatureCommand",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.25,
+          "offset": -8032,
+          "unit": "1/km",
+          "comment": "Source: isobus_guidance_interface.hpp GuidanceSystemCommand",
+          "value_table": {}
+        },
+        {
+          "name": "CurvatureCommandStatus",
+          "start_bit": 16,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "IntendedNotSteering",
+            "1": "IntendedSteering",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "DiagnosticMessage22",
+      "pgn": 49920,
+      "pgn_hex": "0xC300",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 21,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:21",
+      "signals": []
+    },
+    {
+      "name": "ExtendedTransportProtocolDataTransfer",
+      "pgn": 50944,
+      "pgn_hex": "0xC700",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 22,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:22",
+      "signals": []
+    },
+    {
+      "name": "ExtendedTransportProtocolConnectionManagement",
+      "pgn": 51200,
+      "pgn_hex": "0xC800",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 23,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:23",
+      "signals": []
+    },
+    {
+      "name": "ProcessData",
+      "pgn": 51968,
+      "pgn_hex": "0xCB00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 24,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:24",
+      "signals": []
+    },
+    {
+      "name": "RequestForRepetitionRate",
+      "pgn": 52224,
+      "pgn_hex": "0xCC00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 25,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:25",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage13",
+      "pgn": 57088,
+      "pgn_hex": "0xDF00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 26,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:26",
+      "signals": []
+    },
+    {
+      "name": "VirtualTerminalToECU",
+      "pgn": 58880,
+      "pgn_hex": "0xE600",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 27,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:27",
+      "signals": []
+    },
+    {
+      "name": "ECUtoVirtualTerminal",
+      "pgn": 59136,
+      "pgn_hex": "0xE700",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 28,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:28",
+      "signals": []
+    },
+    {
+      "name": "Acknowledge",
+      "pgn": 59392,
+      "pgn_hex": "0xE800",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 29,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:29",
+      "signals": []
+    },
+    {
+      "name": "ParameterGroupNumberRequest",
+      "pgn": 59904,
+      "pgn_hex": "0xEA00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 30,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:30",
+      "signals": []
+    },
+    {
+      "name": "TransportProtocolDataTransfer",
+      "pgn": 60160,
+      "pgn_hex": "0xEB00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 31,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:31",
+      "signals": []
+    },
+    {
+      "name": "TransportProtocolConnectionManagement",
+      "pgn": 60416,
+      "pgn_hex": "0xEC00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 32,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:32",
+      "signals": []
+    },
+    {
+      "name": "AddressClaim",
+      "pgn": 60928,
+      "pgn_hex": "0xEE00",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 33,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:33",
+      "signals": []
+    },
+    {
+      "name": "MachineSelectedSpeed",
+      "pgn": 61474,
+      "pgn_hex": "0xF022",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 35,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:35",
+      "signals": [
+        {
+          "name": "MachineSelectedSpeed",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.001,
+          "offset": 0,
+          "unit": "m/s",
+          "comment": "Source: isobus_speed_distance_messages.hpp MachineSelectedSpeedData",
+          "value_table": {}
+        },
+        {
+          "name": "MachineSelectedSpeedDistance",
+          "start_bit": 16,
+          "length": 32,
+          "factor": 1,
+          "offset": 0,
+          "unit": "m",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "MachineSelectedSpeedExitReasonCode",
+          "start_bit": 48,
+          "length": 6,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "Source-of-selected-speed exit reason code per ISO 11783-7",
+          "value_table": {}
+        },
+        {
+          "name": "MachineSelectedSpeedSource",
+          "start_bit": 54,
+          "length": 3,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=Wheel 1=Ground 2=Navigation 3=Blended 4=Simulated",
+          "value_table": {
+            "0": "Wheel",
+            "1": "Ground",
+            "2": "Navigation",
+            "3": "Blended",
+            "4": "Simulated"
+          }
+        },
+        {
+          "name": "MachineDirection",
+          "start_bit": 57,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "Reverse",
+            "1": "Forward",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "HeartbeatMessage",
+      "pgn": 61668,
+      "pgn_hex": "0xF0E4",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 36,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:36",
+      "signals": [
+        {
+          "name": "HeartbeatSequenceCounter",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "Increments 0..250 then wraps; per isobus_heartbeat.hpp",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "name": "ProductIdentification",
+      "pgn": 64653,
+      "pgn_hex": "0xFC8D",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 37,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:37",
+      "signals": []
+    },
+    {
+      "name": "ControlFunctionFunctionalities",
+      "pgn": 64654,
+      "pgn_hex": "0xFC8E",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 38,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:38",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticProtocolIdentification",
+      "pgn": 64818,
+      "pgn_hex": "0xFD32",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 39,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:39",
+      "signals": []
+    },
+    {
+      "name": "MachineSelectedSpeedCommand",
+      "pgn": 64835,
+      "pgn_hex": "0xFD43",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 40,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:40",
+      "signals": []
+    },
+    {
+      "name": "WorkingSetMaster",
+      "pgn": 65037,
+      "pgn_hex": "0xFE0D",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 41,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:41",
+      "signals": []
+    },
+    {
+      "name": "LanguageCommand",
+      "pgn": 65039,
+      "pgn_hex": "0xFE0F",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 42,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:42",
+      "signals": [
+        {
+          "name": "LanguageCode_Byte0",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "ASCII char 1 of ISO 639-1 language code, e.g. 'e' for en",
+          "value_table": {}
+        },
+        {
+          "name": "LanguageCode_Byte1",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "ASCII char 2",
+          "value_table": {}
+        },
+        {
+          "name": "NumberFormat",
+          "start_bit": 16,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "Decimal separator + grouping convention",
+          "value_table": {}
+        },
+        {
+          "name": "DateFormat",
+          "start_bit": 24,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=ddmmyyyy 1=ddyyyymm 2=mmyyyydd 3=mmddyyyy 4=yyyymmdd 5=yyyyddmm",
+          "value_table": {}
+        },
+        {
+          "name": "TimeFormat",
+          "start_bit": 32,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=24h 1=12h",
+          "value_table": {}
+        },
+        {
+          "name": "DistanceUnits",
+          "start_bit": 34,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=metric 1=imperial-US 2=imperial-UK 3=reserved",
+          "value_table": {}
+        },
+        {
+          "name": "AreaUnits",
+          "start_bit": 36,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "VolumeUnits",
+          "start_bit": 38,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "MassUnits",
+          "start_bit": 40,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TemperatureUnits",
+          "start_bit": 42,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "PressureUnits",
+          "start_bit": 44,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "name": "MaintainPower",
+      "pgn": 65095,
+      "pgn_hex": "0xFE47",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 43,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:43",
+      "signals": [
+        {
+          "name": "MaintainPower_MaxTimeFromOff",
+          "start_bit": 0,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "MaintainPower request \u2014 maximum time for ECU power-down",
+          "value_table": {
+            "0": "DoNotMaintain",
+            "1": "Maintain2Sec",
+            "2": "MaintainExt",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MaintainPower_KeySwitchState",
+          "start_bit": 6,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "Off",
+            "1": "NotOff",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MaintainPower_ImplementInWorkState",
+          "start_bit": 8,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "NotInWork",
+            "1": "InWork",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MaintainPower_ImplementReadyToWorkState",
+          "start_bit": 10,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "NotReady",
+            "1": "Ready",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "WheelBasedSpeedAndDistance",
+      "pgn": 65096,
+      "pgn_hex": "0xFE48",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 44,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:44",
+      "signals": [
+        {
+          "name": "WheelBasedMachineSpeed",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.001,
+          "offset": 0,
+          "unit": "m/s",
+          "comment": "Source: isobus_speed_distance_messages.hpp WheelBasedMachineSpeedData",
+          "value_table": {}
+        },
+        {
+          "name": "WheelBasedMachineDistance",
+          "start_bit": 16,
+          "length": 32,
+          "factor": 1,
+          "offset": 0,
+          "unit": "m",
+          "comment": "Source: isobus_speed_distance_messages.hpp",
+          "value_table": {}
+        },
+        {
+          "name": "MaximumTimeOfTractorPowerOk",
+          "start_bit": 48,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "minutes",
+          "comment": "Source: isobus_speed_distance_messages.hpp",
+          "value_table": {}
+        },
+        {
+          "name": "OperatorDirectionReversed",
+          "start_bit": 56,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=NotReversed 1=Reversed 2=Error 3=NotAvailable",
+          "value_table": {
+            "0": "NotReversed",
+            "1": "Reversed",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "StartStopState",
+          "start_bit": 58,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=Stop 1=Start 2=Error 3=NotAvailable",
+          "value_table": {
+            "0": "Stop",
+            "1": "Start",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "KeySwitchState",
+          "start_bit": 60,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=Off 1=NotOff 2=Error 3=NotAvailable",
+          "value_table": {
+            "0": "Off",
+            "1": "NotOff",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        },
+        {
+          "name": "MachineDirection",
+          "start_bit": 62,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=Reverse 1=Forward 2=Error 3=NotAvailable",
+          "value_table": {
+            "0": "Reverse",
+            "1": "Forward",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "GroundBasedSpeedAndDistance",
+      "pgn": 65097,
+      "pgn_hex": "0xFE49",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 45,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:45",
+      "signals": [
+        {
+          "name": "GroundBasedMachineSpeed",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.001,
+          "offset": 0,
+          "unit": "m/s",
+          "comment": "Source: isobus_speed_distance_messages.hpp GroundBasedSpeedAndDistance",
+          "value_table": {}
+        },
+        {
+          "name": "GroundBasedMachineDistance",
+          "start_bit": 16,
+          "length": 32,
+          "factor": 1,
+          "offset": 0,
+          "unit": "m",
+          "comment": "Source: isobus_speed_distance_messages.hpp",
+          "value_table": {}
+        },
+        {
+          "name": "MachineDirection",
+          "start_bit": 62,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "0=Reverse 1=Forward 2=Error 3=NotAvailable",
+          "value_table": {
+            "0": "Reverse",
+            "1": "Forward",
+            "2": "Error",
+            "3": "NotAvailable"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ECUIdentificationInformation",
+      "pgn": 64965,
+      "pgn_hex": "0xFDC5",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 46,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:46",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage1",
+      "pgn": 65226,
+      "pgn_hex": "0xFECA",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 47,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:47",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage2",
+      "pgn": 65227,
+      "pgn_hex": "0xFECB",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 48,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:48",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage3",
+      "pgn": 65228,
+      "pgn_hex": "0xFECC",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 49,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:49",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage11",
+      "pgn": 65235,
+      "pgn_hex": "0xFED3",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 50,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:50",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage14",
+      "pgn": 55552,
+      "pgn_hex": "0xD900",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 51,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:51",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage15",
+      "pgn": 55296,
+      "pgn_hex": "0xD800",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 52,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:52",
+      "signals": []
+    },
+    {
+      "name": "DiagnosticMessage16",
+      "pgn": 55040,
+      "pgn_hex": "0xD700",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 53,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:53",
+      "signals": []
+    },
+    {
+      "name": "CommandedAddress",
+      "pgn": 65240,
+      "pgn_hex": "0xFED8",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 54,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:54",
+      "signals": []
+    },
+    {
+      "name": "SoftwareIdentification",
+      "pgn": 65242,
+      "pgn_hex": "0xFEDA",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 55,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:55",
+      "signals": []
+    },
+    {
+      "name": "AllImplementsStopOperationsSwitchState",
+      "pgn": 64770,
+      "pgn_hex": "0xFD02",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 56,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:56",
+      "signals": []
+    },
+    {
+      "name": "TimeDate",
+      "pgn": 65254,
+      "pgn_hex": "0xFEE6",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 57,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:57",
+      "signals": [
+        {
+          "name": "Seconds",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 0.25,
+          "offset": 0,
+          "unit": "s",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Minutes",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "min",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Hours",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "h",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Month",
+          "start_bit": 24,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "month",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Day",
+          "start_bit": 32,
+          "length": 8,
+          "factor": 0.25,
+          "offset": 0,
+          "unit": "day",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Year",
+          "start_bit": 40,
+          "length": 8,
+          "factor": 1,
+          "offset": 1985,
+          "unit": "year",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "LocalMinuteOffset",
+          "start_bit": 48,
+          "length": 8,
+          "factor": 1,
+          "offset": -125,
+          "unit": "min",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "LocalHourOffset",
+          "start_bit": 56,
+          "length": 8,
+          "factor": 1,
+          "offset": -125,
+          "unit": "h",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "name": "ComponentIdentification",
+      "pgn": 65259,
+      "pgn_hex": "0xFEEB",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 58,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:58",
+      "signals": []
+    },
+    {
+      "name": "VesselHeading",
+      "pgn": 127250,
+      "pgn_hex": "0x1F112",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 59,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:59",
+      "signals": []
+    },
+    {
+      "name": "RateOfTurn",
+      "pgn": 127251,
+      "pgn_hex": "0x1F113",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 60,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:60",
+      "signals": []
+    },
+    {
+      "name": "PositionRapidUpdate",
+      "pgn": 129025,
+      "pgn_hex": "0x1F801",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 61,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:61",
+      "signals": []
+    },
+    {
+      "name": "CourseOverGroundSpeedOverGroundRapidUpdate",
+      "pgn": 129026,
+      "pgn_hex": "0x1F802",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 62,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:62",
+      "signals": []
+    },
+    {
+      "name": "PositionDeltaHighPrecisionRapidUpdate",
+      "pgn": 129027,
+      "pgn_hex": "0x1F803",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 63,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:63",
+      "signals": []
+    },
+    {
+      "name": "GNSSPositionData",
+      "pgn": 129029,
+      "pgn_hex": "0x1F805",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 64,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:64",
+      "signals": []
+    },
+    {
+      "name": "Datum",
+      "pgn": 129044,
+      "pgn_hex": "0x1F814",
+      "source_file": "can_general_parameter_group_numbers.hpp",
+      "source_line": 65,
+      "comment": "Source: AgIsoStack++ can_general_parameter_group_numbers.hpp:65",
+      "signals": []
+    }
+  ]
+}
