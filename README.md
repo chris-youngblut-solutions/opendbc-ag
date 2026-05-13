@@ -37,9 +37,21 @@ pip install -e .
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md). PRs accepted for additional public-spec-derived content. **Proprietary OEM PGNs (PGN IDs in 0xEF00 or 0xFF00–0xFFFF ranges) are out of scope and CI-rejected.**
 
+By participating you agree to the project [Code of Conduct](docs/code-of-conduct.md).
+
+## Documentation
+
+- [`docs/architecture.md`](docs/architecture.md) — directory tour, data flow, CI gates
+- [`docs/cabana-for-ag-setup.md`](docs/cabana-for-ag-setup.md) — end-to-end sniffing + signal-discovery workflow
+- [`docs/signal-naming-guide.md`](docs/signal-naming-guide.md) — DBC naming conventions
+- [`docs/coverage.md`](docs/coverage.md) — auto-generated corpus statistics
+- [`docs/legal-context.md`](docs/legal-context.md) — scope-policy rationale (FTC v. Deere, §1201, FARM Act, Iowa HF 2763)
+- [`docs/faq.md`](docs/faq.md) — frequently-asked questions
+- [`docs/code-of-conduct.md`](docs/code-of-conduct.md) — CoC + project-specific addendum
+
 ## License
 
-[MIT](LICENSE). See also [`docs/legal-context.md`](docs/legal-context.md) for the policy rationale.
+[MIT](LICENSE). See [`docs/legal-context.md`](docs/legal-context.md) for the scope-policy rationale.
 
 ## Acknowledgments
 
