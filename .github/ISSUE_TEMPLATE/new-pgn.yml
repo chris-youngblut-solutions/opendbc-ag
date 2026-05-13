@@ -1,0 +1,50 @@
+name: New PGN contribution intake
+description: Propose adding a new PGN or enriching an existing one with signal definitions
+labels: [new-pgn]
+body:
+  - type: input
+    id: pgn
+    attributes:
+      label: PGN (hex)
+      placeholder: "0xFEEE"
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: PGN name
+      placeholder: "Engine Temperature 1"
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Public source citation
+      description: URL of the public summary that documents this PGN's signals. opendbc-ag is pure-standard — no proprietary OEM content.
+      placeholder: |
+        - isobus.net VDMA Data Dictionary detail page: <URL>
+        - Wikipedia J1939 PGN table
+        - AgIsoStack++ <file path>:<line range>
+    validations:
+      required: true
+  - type: textarea
+    id: signals
+    attributes:
+      label: Signal definitions (if known)
+      description: |
+        List signals with bit positions, lengths, scale, offset, units. Use the format from `docs/signal-naming-guide.md`.
+      placeholder: |
+        - EngineCoolantTemp: bits 0-7, factor 1, offset -40, unit °C
+        - FuelTemp: bits 8-15, factor 1, offset -40, unit °C
+        ...
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: PGN ID is NOT in proprietary range (0xEF00 or 0xFF00..0xFFFF)
+          required: true
+        - label: Source is publicly accessible (not paywalled spec transcription)
+          required: true
+        - label: No OEM proprietary CAN content reverse-engineered
+          required: true

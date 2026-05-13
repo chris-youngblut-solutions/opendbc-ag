@@ -1,0 +1,31 @@
+name: Feature request
+description: Propose a new feature (tooling, workflow, coverage area)
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What feature?
+      description: A clear and concise description of the proposed feature.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?
+      description: What problem does it solve? Who benefits?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope check
+      description: |
+        Confirm this fits opendbc-ag's pure-standard scope. Features involving proprietary OEM CAN data are out of scope.
+    validations:
+      required: true
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation ideas (optional)
+      description: How might this be built? Any references / prior art?

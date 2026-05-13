@@ -1,0 +1,38 @@
+name: Bug report
+description: Report a problem with opendbc-ag (DBC parse failure, incorrect signal, CI issue, etc.)
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What's broken?
+      description: A clear and concise description of the issue.
+    validations:
+      required: true
+  - type: input
+    id: dbc-file
+    attributes:
+      label: Affected DBC file (if applicable)
+      placeholder: opendbc_ag/dbc/iso11783_from_vdma.dbc
+  - type: input
+    id: pgn
+    attributes:
+      label: Affected PGN (if applicable)
+      placeholder: "0xFE48 (WheelBasedSpeedAndDistance)"
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Steps to reproduce; commands run; expected vs actual.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: opendbc-ag version / commit SHA
+      placeholder: "v0.1.0-private or commit hash"
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, OS, relevant tool versions (canmatrix, cantools, etc.)
