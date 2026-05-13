@@ -1,0 +1,909 @@
+{
+  "source": "Hand-curated SAE J1939 ag-relevant subset from public summaries",
+  "primary_sources": [
+    "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+    "CSS Electronics J1939 educational posts (csselectronics.com/pages/j1939-explained-simple-intro)",
+    "Community-curated J1939 PGN references (github.com/iDoka/awesome-automotive-can-id)"
+  ],
+  "license_note": "No paywalled SAE J1939 PDF content has been transcribed. All signal definitions are derived from publicly-summarized content. Verify against your equipment's actual J1939 documentation before production use.",
+  "extraction_date": "2026-05-13",
+  "pgn_count": 18,
+  "signal_count": 70,
+  "pgns": [
+    {
+      "pgn": 61444,
+      "pgn_hex": "0xF004",
+      "pgn_decimal": 61444,
+      "name": "J1939_EEC1_ElectronicEngineController1",
+      "description": "Engine speed, torque mode, demand torque",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineTorqueMode",
+          "start_bit": 0,
+          "length": 4,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {
+            "0": "LowIdleGovernor",
+            "1": "AcceleratorPedal",
+            "2": "CruiseControl",
+            "3": "PTOGovernor",
+            "4": "RoadSpeedGovernor",
+            "5": "ASRControl",
+            "6": "TransmissionControl",
+            "7": "ABSControl",
+            "8": "TorqueLimiting",
+            "9": "HighSpeedGovernor",
+            "10": "BrakingSystem",
+            "11": "RemoteAccelerator",
+            "14": "Other",
+            "15": "NotAvailable"
+          }
+        },
+        {
+          "name": "ActualEngineTorquePct",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 1,
+          "offset": -125,
+          "unit": "%",
+          "comment": "Actual engine percent torque",
+          "value_table": {}
+        },
+        {
+          "name": "EngineSpeed",
+          "start_bit": 24,
+          "length": 16,
+          "factor": 0.125,
+          "offset": 0,
+          "unit": "rpm",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "SourceAddressOfControllingDevice",
+          "start_bit": 40,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "Source address of the device commanding engine torque",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65266,
+      "pgn_hex": "0xFEF2",
+      "pgn_decimal": 65266,
+      "name": "J1939_LFE1_FuelEconomy",
+      "description": "Fuel rate + instantaneous + average fuel economy",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "FuelRate",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "L/h",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "InstantaneousFuelEconomy",
+          "start_bit": 16,
+          "length": 16,
+          "factor": 0.001953125,
+          "offset": 0,
+          "unit": "km/L",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AverageFuelEconomy",
+          "start_bit": 32,
+          "length": 16,
+          "factor": 0.001953125,
+          "offset": 0,
+          "unit": "km/L",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "ThrottlePosition",
+          "start_bit": 48,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65262,
+      "pgn_hex": "0xFEEE",
+      "pgn_decimal": 65262,
+      "name": "J1939_ET1_EngineTemperature1",
+      "description": "Coolant + fuel + engine oil + intercooler temperatures",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineCoolantTemp",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1,
+          "offset": -40,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "FuelTemp",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 1,
+          "offset": -40,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineOilTemp1",
+          "start_bit": 16,
+          "length": 16,
+          "factor": 0.03125,
+          "offset": -273,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TurboOilTemp",
+          "start_bit": 32,
+          "length": 16,
+          "factor": 0.03125,
+          "offset": -273,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineIntercoolerTemp",
+          "start_bit": 48,
+          "length": 8,
+          "factor": 1,
+          "offset": -40,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65263,
+      "pgn_hex": "0xFEEF",
+      "pgn_decimal": 65263,
+      "name": "J1939_EFLP1_EngineFluidLevelPressure1",
+      "description": "Oil pressure/level + coolant pressure/level + fuel delivery pressure",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "FuelDeliveryPressure",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 4,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineOilLevel",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineOilPressure",
+          "start_bit": 24,
+          "length": 8,
+          "factor": 4,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CoolantPressure",
+          "start_bit": 40,
+          "length": 8,
+          "factor": 2,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CoolantLevel",
+          "start_bit": 48,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65265,
+      "pgn_hex": "0xFEF1",
+      "pgn_decimal": 65265,
+      "name": "J1939_CCVS1_CruiseControlVehicleSpeed1",
+      "description": "Vehicle speed + cruise control state + brake/clutch/parking switches",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "TwoSpeedAxleSwitch",
+          "start_bit": 0,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "ParkingBrakeSwitch",
+          "start_bit": 2,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlPauseSwitch",
+          "start_bit": 4,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "WheelBasedVehicleSpeed",
+          "start_bit": 8,
+          "length": 16,
+          "factor": 0.00390625,
+          "offset": 0,
+          "unit": "km/h",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlActive",
+          "start_bit": 24,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlEnableSwitch",
+          "start_bit": 26,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "BrakeSwitch",
+          "start_bit": 28,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "ClutchSwitch",
+          "start_bit": 30,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlSetSwitch",
+          "start_bit": 32,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlCoastSwitch",
+          "start_bit": 34,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlResumeSwitch",
+          "start_bit": 36,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlAccelerateSwitch",
+          "start_bit": 38,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CruiseControlSetSpeed",
+          "start_bit": 40,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "km/h",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "PTOState",
+          "start_bit": 48,
+          "length": 5,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65132,
+      "pgn_hex": "0xFE6C",
+      "pgn_decimal": 65132,
+      "name": "J1939_TCO1_TachographInformation",
+      "description": "Tachograph + driver state (mostly for heavy-truck FMS)",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "Driver1WorkingState",
+          "start_bit": 0,
+          "length": 3,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "Driver2WorkingState",
+          "start_bit": 3,
+          "length": 3,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "VehicleMotion",
+          "start_bit": 6,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TachographVehicleSpeed",
+          "start_bit": 48,
+          "length": 16,
+          "factor": 0.00390625,
+          "offset": 0,
+          "unit": "km/h",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65253,
+      "pgn_hex": "0xFEE5",
+      "pgn_decimal": 65253,
+      "name": "J1939_HOURS_EngineHours",
+      "description": "Engine total hours of operation",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineTotalHoursOfOperation",
+          "start_bit": 0,
+          "length": 32,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "h",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineTotalRevolutions",
+          "start_bit": 32,
+          "length": 32,
+          "factor": 1000,
+          "offset": 0,
+          "unit": "r",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65260,
+      "pgn_hex": "0xFEEC",
+      "pgn_decimal": 65260,
+      "name": "J1939_VI_VehicleIdentification",
+      "description": "Vehicle Identification Number (VIN)",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "VIN_Char01",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "ASCII byte 0 of VIN; full VIN spans multipacket",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65271,
+      "pgn_hex": "0xFEF7",
+      "pgn_decimal": 65271,
+      "name": "J1939_VEP1_VehicleElectricalPower1",
+      "description": "Battery + alternator + engine starter electrical state",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "NetBatteryCurrent",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1,
+          "offset": -125,
+          "unit": "A",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AlternatorCurrent",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "A",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AlternatorPotential",
+          "start_bit": 16,
+          "length": 16,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "V",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "ElectricalPotential",
+          "start_bit": 32,
+          "length": 16,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "V",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "BatteryPotentialSwitched",
+          "start_bit": 48,
+          "length": 16,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "V",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 64892,
+      "pgn_hex": "0xFD7C",
+      "pgn_decimal": 64892,
+      "name": "J1939_DEF_DieselExhaustFluidConcentration",
+      "description": "DEF (urea) tank level + temperature + concentration",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "DEFTankLevel",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "DEFTankTemperature",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 1,
+          "offset": -40,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65251,
+      "pgn_hex": "0xFEE3",
+      "pgn_decimal": 65251,
+      "name": "J1939_EC1_EngineConfiguration1",
+      "description": "Engine configuration data \u2014 displacement, speed limits, fuel type",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineSpeedAtIdle",
+          "start_bit": 0,
+          "length": 16,
+          "factor": 0.125,
+          "offset": 0,
+          "unit": "rpm",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineSpeedAtMaxIdlePoint1",
+          "start_bit": 24,
+          "length": 16,
+          "factor": 0.125,
+          "offset": 0,
+          "unit": "rpm",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65247,
+      "pgn_hex": "0xFEDF",
+      "pgn_decimal": 65247,
+      "name": "J1939_EEC3_ElectronicEngineController3",
+      "description": "Engine demand percent torque + nominal friction torque",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineDemandPercentTorque",
+          "start_bit": 56,
+          "length": 8,
+          "factor": 1,
+          "offset": -125,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 61443,
+      "pgn_hex": "0xF003",
+      "pgn_decimal": 61443,
+      "name": "J1939_EEC2_ElectronicEngineController2",
+      "description": "Accelerator pedal + percent load",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "AcceleratorPedal1LowIdleSwitch",
+          "start_bit": 0,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AcceleratorPedalKickdownSwitch",
+          "start_bit": 2,
+          "length": 2,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AcceleratorPedalPosition1",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EnginePercentLoadAtCurrentSpeed",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 1,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65272,
+      "pgn_hex": "0xFEF8",
+      "pgn_decimal": 65272,
+      "name": "J1939_TRF1_TransmissionFluids1",
+      "description": "Transmission oil + clutch pressure",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "ClutchPressure",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 16,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TransmissionOilLevel",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 0.4,
+          "offset": 0,
+          "unit": "%",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TransmissionFilterDifferentialPressure",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 2,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TransmissionOilPressure",
+          "start_bit": 24,
+          "length": 8,
+          "factor": 16,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "TransmissionOilTemperature",
+          "start_bit": 32,
+          "length": 16,
+          "factor": 0.03125,
+          "offset": -273,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65270,
+      "pgn_hex": "0xFEF6",
+      "pgn_decimal": 65270,
+      "name": "J1939_IC1_InletExhaustConditions1",
+      "description": "Boost + intake air temp + air filter differential pressure",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "ParticulateTrapInletPressure",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 0.5,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "BoostPressure",
+          "start_bit": 8,
+          "length": 8,
+          "factor": 2,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "IntakeManifold1Temperature",
+          "start_bit": 16,
+          "length": 8,
+          "factor": 1,
+          "offset": -40,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AirInletPressure",
+          "start_bit": 24,
+          "length": 8,
+          "factor": 2,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "AirFilterDifferentialPressure",
+          "start_bit": 32,
+          "length": 8,
+          "factor": 0.05,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "ExhaustGasTemp",
+          "start_bit": 40,
+          "length": 16,
+          "factor": 0.03125,
+          "offset": -273,
+          "unit": "\u00b0C",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "CoolantFilterDifferentialPressure",
+          "start_bit": 56,
+          "length": 8,
+          "factor": 0.5,
+          "offset": 0,
+          "unit": "kPa",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 65259,
+      "pgn_hex": "0xFEEB",
+      "pgn_decimal": 65259,
+      "name": "J1939_CI_ComponentIdentification",
+      "description": "Component manufacturer + model + serial \u2014 multipacket BAM",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "ComponentIdent_FirstChar",
+          "start_bit": 0,
+          "length": 8,
+          "factor": 1.0,
+          "offset": 0.0,
+          "unit": "",
+          "comment": "ASCII byte 0; full string spans multipacket transport",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 64690,
+      "pgn_hex": "0xFCB2",
+      "pgn_decimal": 64690,
+      "name": "J1939_FFE_FuelEconomyExtended",
+      "description": "Trip fuel + total fuel + trip distance",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "EngineTripFuel",
+          "start_bit": 0,
+          "length": 32,
+          "factor": 0.5,
+          "offset": 0,
+          "unit": "L",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "EngineTotalFuelUsed",
+          "start_bit": 32,
+          "length": 32,
+          "factor": 0.5,
+          "offset": 0,
+          "unit": "L",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    },
+    {
+      "pgn": 64777,
+      "pgn_hex": "0xFD09",
+      "pgn_decimal": 64777,
+      "name": "J1939_HRLD_HighResolutionTotalVehicleDistance",
+      "description": "High-resolution total vehicle distance",
+      "source": "Wikipedia SAE J1939 PGN list (en.wikipedia.org/wiki/SAE_J1939)",
+      "signals": [
+        {
+          "name": "HighResolutionTotalVehicleDistance",
+          "start_bit": 0,
+          "length": 32,
+          "factor": 5,
+          "offset": 0,
+          "unit": "m",
+          "comment": "",
+          "value_table": {}
+        },
+        {
+          "name": "HighResolutionTripDistance",
+          "start_bit": 32,
+          "length": 32,
+          "factor": 5,
+          "offset": 0,
+          "unit": "m",
+          "comment": "",
+          "value_table": {}
+        }
+      ]
+    }
+  ]
+}
