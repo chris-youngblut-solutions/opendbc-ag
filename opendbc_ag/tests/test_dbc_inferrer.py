@@ -80,3 +80,105 @@ def test_report_renders(analyses):
     assert "CAN ID 0x200" in report
     assert "CAN ID 0x300" in report
     assert "candidate signals" in report
+
+
+def test_cycle_stats_populated(analyses):
+    """R4: each analysis carries mode + stddev + p10 + p90 cycle stats."""
+    for cid, a in analyses.items():
+        assert a.cycle_stats is not None
+        assert a.cycle_stats.mode_ms > 0
+        assert a.cycle_stats.stddev_ms >= 0
+        assert a.cycle_stats.p10_ms <= a.cycle_stats.p90_ms
+
+
+def test_dbc_emission_format():
+    """R4: --format dbc produces parseable DBC output."""
+    import tempfile
+    from canmatrix import formats
+
+    records = dbc_inferrer.load_csv(FIXTURE)
+    analyses = dbc_inferrer.analyze(records)
+    dbc_text = dbc_inferrer.render_dbc(analyses)
+    assert "BO_ " in dbc_text
+    assert "SG_ " in dbc_text
+
+    # Round-trip via canmatrix to confirm it parses
+    with tempfile.NamedTemporaryFile(suffix=".dbc", mode="w", delete=False) as tf:
+        tf.write(dbc_text)
+        tmp = tf.name
+    try:
+        m = formats.loadp(tmp)
+        mat = list(m.values())[0]
+        assert len(mat.frames) >= 1
+    finally:
+        import os
+        os.unlink(tmp)
+
+
+@pytest.mark.xfail(reason="known limitation: outlier byte (cardinality=2) misclassified as boolean toggle")
+def test_outlier_byte_not_misclassified_as_boolean():
+    """Synthetic byte that's mostly-constant 0x00 with one 0xFF sample.
+
+    Cardinality is 2, so current heuristic enters the boolean branch and reports
+    a 1-bit signal. The correct call is "mostly-constant with outlier" — needs
+    a separate detector that thresholds on transition frequency, not cardinality.
+    """
+    import csv as _csv
+    from pathlib import Path as _P
+    import tempfile
+
+    rows = []
+    for i in range(200):
+        payload = bytes([0x00] * 8)
+        if i == 100:
+            payload = bytes([0xFF] + [0x00] * 7)
+        rows.append((i * 0.1, 0x999, payload.hex().upper()))
+
+    with tempfile.NamedTemporaryFile(suffix=".csv", mode="w", delete=False) as tf:
+        w = _csv.writer(tf)
+        w.writerow(["timestamp", "can_id", "data_hex"])
+        for r in rows:
+            w.writerow([f"{r[0]:.4f}", r[1], r[2]])
+        path = tf.name
+
+    try:
+        records = dbc_inferrer.load_csv(_P(path))
+        analyses = dbc_inferrer.analyze(records)
+        a = analyses[0x999]
+        bool_signals = [s for s in a.candidate_signals if s.size == 1]
+        # We *want* this to be empty (the outlier should not look like a Bool)
+        assert not bool_signals
+    finally:
+        import os
+        os.unlink(path)
+
+
+@pytest.mark.xfail(reason="known limitation: signed signals reported as unsigned with discontinuous range")
+def test_signed_signal_crossing_0x80():
+    """A signal that crosses the 0x80 sign boundary should be flagged as possibly signed."""
+    import csv as _csv
+    from pathlib import Path as _P
+    import tempfile
+
+    rows = []
+    for i in range(200):
+        # Triangle wave 0x70 → 0x90 → 0x70 (signed -16 to +16)
+        v = 0x70 + (i % 32 if (i // 32) % 2 == 0 else 32 - (i % 32))
+        rows.append((i * 0.1, 0xAAA, bytes([v & 0xFF] + [0x00] * 7).hex().upper()))
+
+    with tempfile.NamedTemporaryFile(suffix=".csv", mode="w", delete=False) as tf:
+        w = _csv.writer(tf)
+        w.writerow(["timestamp", "can_id", "data_hex"])
+        for r in rows:
+            w.writerow([f"{r[0]:.4f}", r[1], r[2]])
+        path = tf.name
+
+    try:
+        records = dbc_inferrer.load_csv(_P(path))
+        analyses = dbc_inferrer.analyze(records)
+        a = analyses[0xAAA]
+        # We *want* the signed candidacy noted in the rationale.
+        assert any("signed" in s.rationale.lower() for s in a.candidate_signals)
+    finally:
+        import os
+        os.unlink(path)

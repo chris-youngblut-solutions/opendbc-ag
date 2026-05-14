@@ -36,10 +36,20 @@ class SignalCandidate:
 
 
 @dataclass
+class CycleStats:
+    """Inter-arrival timing statistics for a single CAN ID."""
+    mode_ms: float
+    stddev_ms: float
+    p10_ms: float
+    p90_ms: float
+
+
+@dataclass
 class FrameAnalysis:
     can_id: int
     sample_count: int
     cycle_time_ms: float | None
+    cycle_stats: CycleStats | None = None
     constant_bytes: list[int] = field(default_factory=list)
     candidate_signals: list[SignalCandidate] = field(default_factory=list)
 
@@ -69,6 +79,29 @@ def _infer_cycle_ms(timestamps: list[float]) -> float | None:
     if not rounded:
         return None
     return statistics.mode(rounded)
+
+
+def _cycle_stats(timestamps: list[float]) -> CycleStats | None:
+    """Return mode + stddev + p10 + p90 of inter-arrival diffs in ms."""
+    if len(timestamps) < 2:
+        return None
+    diffs = sorted((b - a) * 1000.0 for a, b in zip(timestamps, timestamps[1:]))
+    if not diffs:
+        return None
+    rounded = [round(d, 1) for d in diffs]
+    mode_ms = statistics.mode(rounded)
+    stddev_ms = statistics.pstdev(diffs) if len(diffs) >= 2 else 0.0
+    n = len(diffs)
+    p10 = diffs[max(0, int(n * 0.10) - 1)]
+    p90 = diffs[max(0, int(n * 0.90) - 1)]
+    return CycleStats(mode_ms=mode_ms, stddev_ms=stddev_ms, p10_ms=p10, p90_ms=p90)
+
+
+def cycle_is_low_confidence(stats: CycleStats | None) -> bool:
+    """Low-confidence if observed stddev is > 30% of the mode."""
+    if stats is None or stats.mode_ms <= 0:
+        return True
+    return stats.stddev_ms > 0.30 * stats.mode_ms
 
 
 def _byte_value_sets(payloads: list[bytes], n_bytes: int) -> list[set[int]]:
@@ -127,9 +160,12 @@ def analyze_frame(can_id: int, samples: list[tuple[float, bytes]]) -> FrameAnaly
     n_bytes = max((len(p) for p in payloads), default=0)
 
     cycle = _infer_cycle_ms(timestamps)
+    stats = _cycle_stats(timestamps)
     byte_sets = _byte_value_sets(payloads, n_bytes)
     constants = [i for i, s in enumerate(byte_sets) if len(s) == 1]
     varying = [i for i, s in enumerate(byte_sets) if len(s) > 1]
+    low_conf_cycle = cycle_is_low_confidence(stats)
+    low_sample = len(samples) < 100
 
     candidates: list[SignalCandidate] = []
 
@@ -186,10 +222,24 @@ def analyze_frame(can_id: int, samples: list[tuple[float, bytes]]) -> FrameAnaly
             rationale=f"Adjacent varying bytes [{start}..{start + size - 1}] suggest a {size * 8}-bit little-endian signal",
         ))
 
+    # Apply low-confidence penalty to all candidate signals if the cycle is jittery
+    # or sample count is below the 100-frame floor.
+    if low_conf_cycle or low_sample:
+        penalty_reason = []
+        if low_conf_cycle:
+            penalty_reason.append("jittery cycle")
+        if low_sample:
+            penalty_reason.append(f"low sample count ({len(samples)})")
+        penalty_note = " (low-confidence: " + ", ".join(penalty_reason) + ")"
+        for c in candidates:
+            c.confidence *= 0.5
+            c.rationale += penalty_note
+
     return FrameAnalysis(
         can_id=can_id,
         sample_count=len(samples),
         cycle_time_ms=cycle,
+        cycle_stats=stats,
         constant_bytes=constants,
         candidate_signals=candidates,
     )
@@ -222,15 +272,70 @@ def render_report(analyses: dict[int, FrameAnalysis]) -> str:
     return "\n".join(lines)
 
 
+def render_dbc(analyses: dict[int, FrameAnalysis]) -> str:
+    """Emit candidate frames + signals as DBC syntax via canmatrix.
+
+    Each candidate signal becomes a `SG_` row; the rationale lands in a `CM_ SG_` comment.
+    Cycle time (when known) is set on the frame for downstream consumption.
+    """
+    from canmatrix import canmatrix as cm
+    from canmatrix import formats
+    import tempfile
+
+    matrix = cm.CanMatrix()
+    for cid in sorted(analyses):
+        a = analyses[cid]
+        frame = cm.Frame(
+            name=f"CAN_{cid:X}",
+            arbitration_id=cm.ArbitrationId(id=cid, extended=cid > 0x7FF),
+            size=8,
+            cycle_time=int(a.cycle_time_ms) if a.cycle_time_ms else 0,
+            comment=(
+                f"Inferred from CAN log, {a.sample_count} samples, "
+                f"cycle≈{a.cycle_time_ms}ms"
+                + (f" (stddev {a.cycle_stats.stddev_ms:.1f}ms)" if a.cycle_stats else "")
+            ),
+        )
+        for sig in a.candidate_signals:
+            s = cm.Signal(
+                name=sig.name,
+                start_bit=sig.start_bit,
+                size=sig.size,
+                is_little_endian=True,
+                is_signed=False,
+                factor=sig.factor,
+                offset=sig.offset,
+                min=sig.min_value,
+                max=sig.max_value,
+                comment=f"conf={sig.confidence:.2f}; {sig.rationale}",
+            )
+            frame.add_signal(s)
+        matrix.add_frame(frame)
+
+    with tempfile.NamedTemporaryFile(suffix=".dbc", mode="w+", delete=False) as tf:
+        tmp_path = Path(tf.name)
+    try:
+        formats.dumpp({"": matrix}, str(tmp_path))
+        return tmp_path.read_text()
+    finally:
+        tmp_path.unlink(missing_ok=True)
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("log", type=Path, help="Path to CAN log CSV (columns: timestamp, can_id, data_hex)")
-    p.add_argument("-o", "--output", type=Path, default=None, help="Write Markdown report to file (default: stdout)")
+    p.add_argument("-o", "--output", type=Path, default=None, help="Write report to file (default: stdout)")
+    p.add_argument(
+        "--format",
+        choices=("markdown", "dbc"),
+        default="markdown",
+        help="Output format. `markdown` for human-readable report, `dbc` for paste-into-DBC syntax.",
+    )
     args = p.parse_args(argv)
 
     records = load_csv(args.log)
     analyses = analyze(records)
-    report = render_report(analyses)
+    report = render_dbc(analyses) if args.format == "dbc" else render_report(analyses)
 
     if args.output:
         args.output.write_text(report)
