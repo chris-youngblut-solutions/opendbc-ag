@@ -65,6 +65,7 @@ By participating you agree to the project [Code of Conduct](docs/code-of-conduct
 - [`docs/legal-context.md`](docs/legal-context.md) — scope-policy rationale (FTC v. Deere, §1201, FARM Act, Iowa HF 2763)
 - [`docs/faq.md`](docs/faq.md) — frequently-asked questions
 - [`docs/code-of-conduct.md`](docs/code-of-conduct.md) — CoC + project-specific addendum
+- [`SECURITY.md`](SECURITY.md) — safety-relevant signal-error disclosure protocol
 
 ## License
 

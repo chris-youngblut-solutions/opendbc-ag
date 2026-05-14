@@ -24,7 +24,7 @@ It does **not** govern unrelated personal speech in private spaces, or behavior 
 
 ### 2. How to report
 
-To report a concern under the Covenant, email **`ctyoung.agent@gmail.com`**.
+To report a concern under the Covenant, email **`ctyoungb.agent@gmail.com`**.
 
 You can include as much or as little detail as you choose. Reporters may use a pseudonymous email; reports will be read by the maintainer named below. We will acknowledge receipt within seven days.
 
