@@ -16,4 +16,9 @@
 # pin is being introduced retroactively. Treat the current cached
 # `extractions/agisostack_pgns.json` as authoritative until the next refresh,
 # at which point the new SHA gets pinned here.
-unknown-2026-05-13
+# Pin gate now requires a 7-40 char hex SHA on the first non-comment line.
+# The current cached agisostack_pgns.json predates the gate; refresh-on-rerun
+# will record the real SHA the next time `python -m opendbc_ag.tools.extract_agisostack`
+# runs against a fresh clone. Until then, the extractor is gated off — which is
+# the intended behavior, since the cached JSON should not be regenerated casually.
+0000000

@@ -412,7 +412,20 @@ def main() -> int:
             file=sys.stderr,
         )
         return 1
-    pinned_sha = pin_file.read_text().strip().split()[0]
+    # Parse the pin: first non-comment, non-blank line.
+    pinned_sha = next(
+        (line.strip() for line in pin_file.read_text().splitlines()
+         if line.strip() and not line.strip().startswith("#")),
+        "",
+    )
+    import re as _re
+    if not _re.match(r"^[0-9a-f]{7,40}$", pinned_sha):
+        print(
+            f"ERROR: extractions/AGISOSTACK_PIN.txt contains {pinned_sha!r}, which is not a "
+            "7-40 char hex SHA. Pin a real upstream commit before running the extractor.",
+            file=sys.stderr,
+        )
+        return 1
     print(f"AgIsoStack++ pin: {pinned_sha}")
 
     enum_header = (

@@ -1,9 +1,16 @@
 """Strip PII / identifying details from CAN logs before contributing to corpus/.
 
-Operations:
-- Quantize GPS coordinates to a ~1 km grid (default).
+Operations currently wired into `anonymize_log_csv` (CLI-callable):
 - Reset machine source-address ranges to 0xFE (NULL address per J1939-81).
 - Round timestamps to date-level (00:00:00 UTC of the same day).
+- Optional: zero a slice of payload bytes (`--strip-bytes a:b`).
+
+Library-only helper (not yet invoked from the CSV path):
+- `quantize_gps(lat, lon)` — coarse GPS grid quantization. Exposed for callers
+  that decode GPS-bearing PGNs (e.g., NMEA 2000 0x1F801/0x1F805) and need to
+  round resulting coordinates before redistribution. A future revision will
+  detect optional `lat`/`lon` columns or known GPS PGNs in the log and apply
+  this automatically; until then, callers must invoke it explicitly.
 
 This is a best-effort tool. Operators are still responsible for reviewing
 output before publishing. Anonymization happens at the **log** level; the

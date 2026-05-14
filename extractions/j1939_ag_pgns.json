@@ -6,7 +6,7 @@
     "Community-curated J1939 PGN references (github.com/iDoka/awesome-automotive-can-id)"
   ],
   "license_note": "No paywalled SAE J1939 PDF content has been transcribed. All signal definitions are derived from publicly-summarized content. Verify against your equipment's actual J1939 documentation before production use.",
-  "extraction_date": "2026-05-13",
+  "extraction_date": "2026-05-14",
   "pgn_count": 17,
   "signal_count": 69,
   "pgns": [

@@ -379,6 +379,7 @@ def main() -> int:
     from canmatrix import formats
 
     matrix = cm.CanMatrix()
+    matrix.baudrate = 500000  # J1939 chassis bus standard
     for p in valid:
         frame_id = cm.ArbitrationId(id=p.pgn, extended=True)
         frame = cm.Frame(
@@ -388,16 +389,19 @@ def main() -> int:
             comment=f"{p.description}. Source: {p.source}",
         )
         for s in p.signals:
+            # Round factor/offset to avoid IEEE-754 round-trip artifacts in the DBC text.
+            # J1939-71 documents factors at sub-percent precision; 6 decimals is enough.
+            sig_comment = s.comment or f"Per-signal source: {p.source}"
             sig = cm.Signal(
                 name=s.name,
                 start_bit=s.start_bit,
                 size=s.length,
                 is_little_endian=True,
                 is_signed=False,
-                factor=s.factor,
-                offset=s.offset,
+                factor=round(float(s.factor), 6),
+                offset=round(float(s.offset), 6),
                 unit=s.unit,
-                comment=s.comment,
+                comment=sig_comment,
             )
             for v, label in s.value_table.items():
                 sig.add_values(v, label)
@@ -405,7 +409,14 @@ def main() -> int:
         matrix.add_frame(frame)
 
     out_dbc = repo / "opendbc_ag/dbc/j1939_ag_subset.dbc"
-    formats.dumpp({"": matrix}, str(out_dbc))
+    # dbcExportEncoding=utf-8 → emits `°C` as UTF-8 (0xC2 0xB0) instead of Latin-1 (0xB0).
+    # dbcExportCommentEncoding=utf-8 → same for CM_ comment text.
+    formats.dumpp(
+        {"": matrix},
+        str(out_dbc),
+        dbcExportEncoding="utf-8",
+        dbcExportCommentEncoding="utf-8",
+    )
     print(f"Wrote DBC: {out_dbc} ({len(valid)} frames)")
 
     return 0

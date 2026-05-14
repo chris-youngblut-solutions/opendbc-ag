@@ -12,17 +12,15 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-from canmatrix import formats
-
 from opendbc_ag.tools._scope_policy import is_in_scope, reject_reason
+from opendbc_ag.tools._dbc_utils import first_matrix
 
 
 def check_scope(dbc_dir: Path) -> list[str]:
     """Out-of-scope frame detection (DP0+DP1 proprietary + name patterns)."""
     violations = []
     for dbc in sorted(dbc_dir.glob("*.dbc")):
-        m = formats.loadp(str(dbc))
-        mat = list(m.values())[0]
+        mat = first_matrix(dbc)
         for frame in mat.frames:
             pgn = frame.arbitration_id.id
             if not is_in_scope(pgn, frame.name):
@@ -36,8 +34,7 @@ def check_no_duplicates(dbc_dir: Path) -> list[str]:
     """Cross-DBC duplicate PGN ID detection."""
     seen: dict[int, list[tuple[str, str]]] = defaultdict(list)
     for dbc in sorted(dbc_dir.glob("*.dbc")):
-        m = formats.loadp(str(dbc))
-        mat = list(m.values())[0]
+        mat = first_matrix(dbc)
         for frame in mat.frames:
             seen[frame.arbitration_id.id].append((dbc.name, frame.name))
     return [
@@ -55,8 +52,7 @@ def check_source_citations(dbc_dir: Path) -> list[str]:
     """
     missing = []
     for dbc in sorted(dbc_dir.glob("*.dbc")):
-        m = formats.loadp(str(dbc))
-        mat = list(m.values())[0]
+        mat = first_matrix(dbc)
         for frame in mat.frames:
             c = (frame.comment or "").lower()
             if "source:" not in c and "http" not in c and "isobus.net" not in c:

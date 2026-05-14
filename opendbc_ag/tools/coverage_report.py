@@ -20,7 +20,7 @@ def main() -> int:
     args = parser.parse_args()
     repo = args.repo_root
 
-    from canmatrix import formats
+    from opendbc_ag.tools._dbc_utils import first_matrix
 
     dbc_dir = repo / "opendbc_ag/dbc"
     if not dbc_dir.exists():
@@ -31,8 +31,7 @@ def main() -> int:
     total_signals = 0
     pgn_id_set: set[int] = set()
     for dbc_path in sorted(dbc_dir.glob("*.dbc")):
-        m = formats.loadp(str(dbc_path))
-        mat = list(m.values())[0]
+        mat = first_matrix(dbc_path)
         n_frames = len(mat.frames)
         n_signals = sum(len(f.signals) for f in mat.frames)
         per_dbc.append((dbc_path.name, n_frames, n_signals))
@@ -68,7 +67,7 @@ def main() -> int:
         "",
         "## Scope policy",
         "",
-        "Pure-standard PGNs only. CI rejects any PGN ID in proprietary ranges (`0xEF00`, `0xFF00..0xFFFF`).",
+        "Pure-standard PGNs only. CI rejects any PGN ID in proprietary ranges (`0xEF00` / `0x1EF00` / `0xFF00..0xFFFF` / `0x1FF00..0x1FFFF`) AND any frame whose name matches `^(Proprietary|Reserved)`. Predicate lives in `opendbc_ag/tools/_scope_policy.py`.",
         "",
     ]
 

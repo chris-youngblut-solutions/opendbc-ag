@@ -25,7 +25,7 @@ All notable changes to opendbc-ag are documented here. Format follows [Keep a Ch
 - CI workflows green on `main` — ✅
 - `RALPH_REPORT.md` enumerates user TODOs — ✅
 - No PGN in proprietary range — ✅ (CI-enforced)
-- `docs/cabana-for-ag-setup.md` `<TODO>` placeholders tagged — ✅ (7 user TODOs flagged)
+- `docs/cabana-for-ag-setup.md` `<TODO>` placeholders tagged — ✅ (5 fleet-class TODOs flagged in §7 + 2 introductory `<TODO>` markers)
 
 ## [v0.0.1] — 2026-05-13
 
