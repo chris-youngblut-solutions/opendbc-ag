@@ -1,12 +1,12 @@
 # Legal context
 
-This document summarizes the legal and regulatory landscape that motivates opendbc-ag's existence and shapes its scope policy. It is **for context only**: it is not legal advice, it does not grant any indemnity or exemption, and it does not authorize any specific action against any specific manufacturer or piece of equipment. Decisions about what to do with your own equipment under your own jurisdiction are yours alone.
+This document summarizes the legal and regulatory landscape relevant to opendbc-ag's scope policy. It is **for context only**: it is not legal advice, it does not grant any indemnity or exemption, and it does not authorize any specific action against any specific manufacturer or piece of equipment. Decisions about what to do with your own equipment under your own jurisdiction are yours alone.
 
 If you need legal advice for a specific situation, talk to an attorney.
 
 ---
 
-## Why this project exists in this form
+## Standards, proprietary use, and the repair-rights landscape
 
 Three things are simultaneously true in ag equipment as of 2026:
 
@@ -14,7 +14,7 @@ Three things are simultaneously true in ag equipment as of 2026:
 2. **OEM proprietary use of CAN** sits on top of those public standards. Equipment manufacturers use the proprietary PGN ranges (`0xEF00` peer-to-peer and `0xFF00..0xFFFF` proprietary B) for vendor-defined signals — diagnostic codes, telemetry, parameter settings, software-version handshakes. The exact contents are vendor business secrets and are generally not documented publicly.
 3. **A repair-rights legal movement is in progress** — at the federal level (FTC actions, FARM Act bills), state level (Iowa HF 2763 and analogues), and international (EU Right to Repair Directive). These efforts vary widely in scope and enforcement; the legal status of independent CAN-bus reverse-engineering on owned equipment is jurisdiction-dependent and still evolving.
 
-opendbc-ag's response is to be very strict about what it documents: **standard PGNs from public sources only.** This keeps the project clearly on the legitimate side of every plausible legal regime, regardless of how the repair-rights debate resolves.
+opendbc-ag documents **standard PGNs from public sources only.** This scope is unambiguous across every plausible legal regime, regardless of how the repair-rights debate resolves.
 
 ---
 
@@ -26,41 +26,41 @@ The items below are public-record landmarks contributors might want to know abou
 
 In January 2025, the U.S. Federal Trade Commission and the attorneys general of Illinois and Minnesota filed suit against Deere alleging anti-competitive conduct around repair tools and parts. Case status is publicly trackable on the FTC's case-record portal.
 
-What it means for this project: a federal regulator is actively examining the dealer-network/repair model that motivates much of the right-to-repair conversation. We are not party to the case.
+Relevance to scope: opendbc-ag is not a party to the case; its public-standards scope is unaffected by the outcome.
 
 ### FARM Act (federal, S.3068 / introduced 2023; reintroduced)
 
 The **Fair Repair of Agricultural Equipment Act** is a federal bill that would require manufacturers of ag equipment to provide independent service providers and equipment owners with diagnostic and repair information on fair, reasonable, and non-discriminatory terms. Versions have been introduced in multiple Congresses; status varies by session.
 
-What it means for this project: the FARM Act, if enacted, would alter the practical environment for repair-information access — but the bill addresses *manufacturer disclosure obligations*, not the legal status of independent reverse engineering. opendbc-ag's scope (public standards only) is unaffected either way.
+Relevance to scope: the FARM Act addresses *manufacturer disclosure obligations*, not the legal status of independent reverse engineering. opendbc-ag's scope (public standards only) is unaffected either way.
 
 ### Iowa HF 2763 (state)
 
 Iowa House File 2763, introduced in 2024, is a state-level right-to-repair bill targeting agricultural equipment specifically (relevant given Iowa's role as a major ag-equipment market). Status has shifted between sessions; consult Iowa's legislative tracker for current status.
 
-What it means for this project: state laws can create local protections for repair-related activity but do not preempt federal law (e.g. §1201 of the DMCA — see below).
+Relevance to scope: state laws can create local protections for repair-related activity but do not preempt federal law (e.g. §1201 of the DMCA — see below).
 
 ### DMCA §1201 and the Librarian of Congress's exemption process
 
 17 U.S.C. §1201 prohibits circumvention of "technological protection measures" that control access to copyrighted works. Every three years, the U.S. Copyright Office runs an exemption rulemaking; the **2021 cycle** granted a tractor-software exemption for "diagnosis, maintenance, or repair of agricultural vehicles." The exemption was renewed in the **2024 cycle** and expanded in some respects. It does **not** authorize copyright infringement or circumvention for purposes other than repair, and it is rule-bound (lawful access to the device, no derivative works, etc.).
 
-What it means for this project: opendbc-ag does not produce circumvention tools, does not ship binaries, and documents only public-standard content. Discussion of §1201 in this project is informational. Operators capturing CAN traffic on their own machines for documenting **standard** PGNs are operating in a different legal posture than operators reverse-engineering encrypted firmware — we only address the former here.
+Relevance to scope: opendbc-ag does not produce circumvention tools, does not ship binaries, and documents only public-standard content. Discussion of §1201 here is informational. Capturing CAN traffic on owned equipment to document **standard** PGNs is a different legal posture than reverse-engineering encrypted firmware; opendbc-ag addresses only the former.
 
 ### Tractor Hacking (the community)
 
-[tractorhacking.github.io](https://tractorhacking.github.io/) is a long-running community wiki documenting independent work on ag-equipment CAN systems. It includes substantive discussion of §1201, EULAs, and the legal landscape from the practitioner's side. opendbc-ag is not affiliated with the Tractor Hacking project; we cite it as a reference point.
+[tractorhacking.github.io](https://tractorhacking.github.io/) is a long-running community wiki documenting independent work on ag-equipment CAN systems. It includes substantive discussion of §1201, EULAs, and the legal landscape from the practitioner's side. opendbc-ag is not affiliated with the Tractor Hacking project; it is listed here as a reference point.
 
 ---
 
-## Why opendbc-ag is pure-standard only
+## Scope policy
 
-Given the above, the project's content policy is:
+The project's content policy:
 
 - **In scope:** PGNs in standard ISO 11783 / J1939 ranges, sourced from publicly-available summaries.
 - **Out of scope (CI-enforced):** PGNs in the proprietary ranges `0xEF00` (peer-to-peer) and `0xFF00..0xFFFF` (proprietary B).
 - **Out of scope (policy):** transcribed paywalled-spec text, reverse-engineered OEM proprietary frame definitions, material whose primary purpose is circumvention.
 
-This policy is not a moral statement about other projects' choices. It is a scope-management decision: a clean, narrow, defensible scope is easier to maintain, easier to attract contributors to, easier to recommend to other projects as a dependency, and easier for the maintainer to keep running over years rather than abandoning when the legal risk math changes.
+This policy is a scope-management decision. A focused scope is simpler to maintain, lowers contributor coordination overhead, supports use as a downstream dependency, and stays stable across regulatory change.
 
 ---
 
@@ -75,3 +75,4 @@ The content above is summary information for orientation. It is not legal advice
 | Date | Change |
 |---|---|
 | 2026-05-13 | Initial draft (v0.1.0-private). |
+| 2026-06-16 | Neutralized register (justification → reference); legal facts and disclaimers unchanged. |
