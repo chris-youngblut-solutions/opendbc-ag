@@ -9,7 +9,7 @@ description = "OSS agricultural-CAN DBC repository — ISO 11783 + J1939 ag subs
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
-authors = [{ name = "ctyoungb" }]
+authors = [{ name = "Christopher Youngblut" }]
 keywords = ["agriculture", "isobus", "iso-11783", "j1939", "can-bus", "dbc"]
 classifiers = [
     "Development Status :: 3 - Alpha",

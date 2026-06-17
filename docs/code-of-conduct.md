@@ -28,7 +28,7 @@ To report a concern under the Covenant, email **`ctyoungb.agent@gmail.com`** (a 
 
 You can include as much or as little detail as you choose. Reporters may use a pseudonymous email; reports will be read by the maintainer named below. We will acknowledge receipt within seven days.
 
-**Maintainer responsible for enforcement:** `ctyoungb`
+**Maintainer responsible for enforcement:** `Christopher Youngblut`
 
 ### 3. Conflict of interest (best-effort, single-maintainer project)
 
