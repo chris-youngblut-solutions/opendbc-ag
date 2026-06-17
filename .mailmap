@@ -1,0 +1,4 @@
+# Display all historical commits under the canonical identity (see docs/identity-config.md).
+# .mailmap changes display only — no history rewrite, SHAs unchanged.
+Christopher Youngblut <christopheryoungblut@gmail.com> <ctyoungb.agent@gmail.com>
+Christopher Youngblut <christopheryoungblut@gmail.com> <ctyoungb@gmail.com>
